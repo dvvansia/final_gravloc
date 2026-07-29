@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GRAVLOC | Platform Dashboard — Building Mission Control</title>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-7385FFBGNM"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-7385FFBGNM");
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#303032",
+              "tertiary-fixed-dim": "#e7bf97",
+              error: "#ba1a1a",
+              "on-error": "#ffffff",
+              "on-background": "#1b1c1d",
+              "surface-container": "#efedef",
+              "inverse-on-surface": "#f2f0f2",
+              secondary: "#545f73",
+              "surface-bright": "#fbf9fb",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#d8e3fb",
+              tertiary: "#090300",
+              "tertiary-container": "#2e1901",
+              "on-primary": "#ffffff",
+              "on-surface": "#1b1c1d",
+              "tertiary-fixed": "#ffdcbb",
+              "surface-container-lowest": "#ffffff",
+              surface: "#fbf9fb",
+              "secondary-fixed-dim": "#bcc7de",
+              "outline-variant": "#c4c6cd",
+              "primary-container": "#0b1f33",
+              "primary-fixed-dim": "#b5c8e3",
+              "on-primary-container": "#7587a0",
+              "inverse-primary": "#b5c8e3",
+              "on-tertiary": "#ffffff",
+              background: "#fbf9fb",
+              "surface-variant": "#e4e2e4",
+              "on-secondary-container": "#586377",
+              "on-error-container": "#93000a",
+              "on-primary-fixed-variant": "#36485e",
+              "secondary-container": "#d5e0f8",
+              "on-surface-variant": "#44474c",
+              "surface-dim": "#dbd9db",
+              "error-container": "#ffdad6",
+              primary: "#00050e",
+              "surface-container-highest": "#e4e2e4",
+              "primary-fixed": "#d1e4ff",
+              "on-primary-fixed": "#081d30",
+              "surface-container-low": "#f5f3f5",
+              "on-secondary-fixed": "#111c2d",
+              "on-tertiary-fixed-variant": "#5d4123",
+              "surface-container-high": "#e9e7e9",
+              "on-secondary-fixed-variant": "#3c475a",
+              "on-tertiary-fixed": "#2b1700",
+              "surface-tint": "#4e6077",
+              outline: "#74777d",
+              "on-tertiary-container": "#a27f5b",
+              "accent-cyan": "#38BDF8",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "margin-desktop": "48px",
+              gutter: "24px",
+              unit: "4px",
+              "margin-mobile": "16px",
+              "container-max": "1440px",
+            },
+            fontFamily: {
+              "headline-lg": ["Space Grotesk"],
+              "headline-md": ["Space Grotesk"],
+              "label-mono": ["JetBrains Mono"],
+              "body-md": ["Inter"],
+              "body-sm": ["Inter"],
+            },
+            fontSize: {
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "label-mono": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .technical-line {
+        background-image: linear-gradient(90deg, #e2e8f0 50%, transparent 50%);
+        background-size: 8px 1px;
+        height: 1px;
+        width: 100%;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(226, 232, 240, 0.5);
+      }
+      .status-pulse {
+        animation: statusPulse 2.4s ease-in-out infinite;
+      }
+      @keyframes statusPulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.35;
+        }
+      }
+      .progress-fill {
+        animation: progressGrow 1.4s ease-out forwards;
+      }
+      @keyframes progressGrow {
+        from {
+          width: 0%;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background font-body-md">
+    <!-- Header (Shared Component: TopNavBar) -->
+    <header
+      class="docked full-width top-0 sticky z-50 bg-surface border-b border-outline-variant h-20 w-full"
+    >
+      <div
+        class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center h-full"
+      >
+        <div class="flex items-center gap-4 md:gap-8">
+          <button
+            id="mobile-menu-btn"
+            class="lg:hidden -ml-2 p-2 text-on-background"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <a href="/"
+            ><img
+              alt="GRAVLOC"
+              class="h-7 md:h-8 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa"
+          /></a>
+          <nav class="hidden lg:flex items-center gap-6">
+            <a
+              class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200"
+              href="/"
+              >Home</a
+            >
+            <a
+              class="font-label-mono text-label-mono text-primary font-bold border-b-2 border-primary pb-1"
+              href="/waitlist"
+              >Explore Catalogue</a
+            >
+            <a
+              class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200"
+              href="/supplier"
+              >Suppliers</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4">
+          <a
+            href="login.html"
+            class="hidden sm:inline-block font-label-mono text-label-mono text-on-surface-variant px-2 md:px-4 py-2 hover:text-primary"
+            >Log In</a
+          >
+          <a
+            href="signup.html"
+            class="bg-primary-container text-white px-4 md:px-6 py-2 md:py-2.5 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity inline-block"
+            >Sign Up</a
+          >
+        </div>
+      </div>
+      <!-- Mobile Menu Panel -->
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant shadow-lg"
+      >
+        <nav class="hidden lg:flex items-center gap-6">
+          <a
+            class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200"
+            href="/"
+            >Home</a
+          >
+          <a
+            class="font-label-mono text-label-mono text-primary font-bold border-b-2 border-primary pb-1"
+            href="/"
+            >Explore Catalogue</a
+          >
+          <a
+            class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200"
+            href="supplier.html"
+            >Suppliers</a
+          >
+        </nav>
+      </div>
+    </header>
+    <!-- Status Section -->
+    <section class="relative overflow-hidden pt-10 pb-20 lg:pt-20 lg:pb-28">
+      <div
+        class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"
+      >
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <!-- Left: message -->
+          <div class="space-y-6 md:space-y-8">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-accent-cyan status-pulse"
+              ></span>
+              <span
+                class="font-label-mono text-[10px] uppercase tracking-widest"
+                >Buyer Workspace</span
+              >
+            </div>
+
+            <h1
+              class="font-headline-lg text-[32px] leading-[1.15] md:text-display-lg max-w-xl text-primary-container"
+            >
+              Your mission control for component sourcing is in development
+            </h1>
+
+            <p
+              class="font-body-md text-body-md text-on-surface-variant max-w-lg"
+            >
+              The GRAVLOC dashboard brings search, side-by-side comparison, RFQ
+              tracking, and your approved vendor list into a single workspace.
+              We're finishing the core workflows now.
+            </p>
+
+            <div class="technical-line max-w-xs"></div>
+
+            <div class="flex flex-wrap gap-4 pt-2">
+              <a
+                href="/index.ejs"
+                class="bg-primary-container text-white px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md flex items-center gap-2 hover:scale-[1.02] transition-transform"
+              >
+                Back to Home
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </a>
+              <a
+                href="dashboard.html"
+                class="border border-primary-container text-primary-container px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md hover:bg-surface-container-low transition-colors inline-block"
+              >
+                See the Roadmap
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: status card -->
+          <div class="relative group">
+            <div
+              class="absolute -inset-4 bg-accent-cyan opacity-10 blur-3xl rounded-full"
+            ></div>
+            <div
+              class="relative glass-card rounded-xl overflow-hidden shadow-2xl border border-outline-variant p-8 md:p-10 space-y-8"
+            >
+              <div class="flex items-center justify-between">
+                <div
+                  class="w-14 h-14 bg-primary-container text-white rounded-lg flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined text-[28px]"
+                    >dashboard</span
+                  >
+                </div>
+                <span
+                  class="font-label-mono text-[10px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 rounded-full px-3 py-1"
+                  >In Development</span
+                >
+              </div>
+
+              <div class="space-y-2">
+                <div
+                  class="flex items-center justify-between font-label-mono text-[10px] uppercase tracking-widest text-on-surface-variant"
+                >
+                  <span>Phase 1</span>
+                  <span>MVP Launch</span>
+                </div>
+                <div
+                  class="w-full h-2 rounded-full bg-surface-container overflow-hidden"
+                >
+                  <div
+                    class="h-full bg-accent-cyan rounded-full progress-fill"
+                    style="width: 45%"
+                  ></div>
+                </div>
+                <p class="text-body-sm text-on-surface-variant pt-1">
+                  Buyer workspace and approved vendor list (AVL) build underway.
+                </p>
+              </div>
+
+              <div class="technical-line"></div>
+
+              <form id="notify-form" class="space-y-3">
+                <label
+                  for="notify-email"
+                  class="font-label-mono text-[10px] uppercase tracking-widest text-on-surface-variant"
+                  >Get notified when this goes live</label
+                >
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <input
+                    id="notify-email"
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="Your work email"
+                    class="flex-1 px-4 py-3 rounded-lg bg-white border border-outline-variant text-on-background placeholder:text-on-surface-variant/70 focus:outline-none focus:border-accent-cyan"
+                  />
+                  <button
+                    id="notify-btn"
+                    type="submit"
+                    class="bg-primary-container text-white px-6 py-3 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity whitespace-nowrap"
+                  >
+                    Notify Me
+                  </button>
+                </div>
+                <p class="text-on-surface-variant/60 text-body-sm">
+                  No spam. Unsubscribe anytime.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer (Shared Component) -->
+    <footer
+      class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant"
+    >
+      <div
+        class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-12 gap-gutter"
+      >
+        <div class="col-span-12 lg:col-span-4 space-y-6">
+          <img
+            alt="GRAVLOC"
+            class="h-8 w-auto object-contain brightness-0 invert"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa"
+          />
+          <p class="text-inverse-on-surface font-body-sm max-w-xs opacity-70">
+            © 2026 GRAVLOC. All rights reserved. Precision procurement for
+            mission-critical systems.
+          </p>
+          <div class="flex gap-4">
+            <a
+              href="#"
+              class="text-inverse-on-surface opacity-70 hover:opacity-100 transition-opacity"
+              aria-label="Facebook"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path></svg></a
+            ><a
+              href="#"
+              class="text-inverse-on-surface opacity-70 hover:opacity-100 transition-opacity"
+              aria-label="LinkedIn"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                ></path>
+                <rect width="4" height="12" x="2" y="9"></rect>
+                <circle cx="4" cy="4" r="2"></circle></svg></a
+            ><a
+              href="#"
+              class="text-inverse-on-surface opacity-70 hover:opacity-100 transition-opacity"
+              aria-label="Instagram"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg
+            ></a>
+          </div>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-4">
+          <h4
+            class="font-label-mono text-xs text-white uppercase tracking-widest"
+          >
+            Platform
+          </h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="dashboard.html"
+                >Product Sitemap</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Solutions</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Search Engines</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-4">
+          <h4
+            class="font-label-mono text-xs text-white uppercase tracking-widest"
+          >
+            Compliance
+          </h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Compliance &amp; ITAR</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Quality Assurance</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Security Policy</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-4">
+          <h4
+            class="font-label-mono text-xs text-white uppercase tracking-widest"
+          >
+            Company
+          </h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >About Us</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Privacy Policy</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Terms of Service</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-4">
+          <h4
+            class="font-label-mono text-xs text-white uppercase tracking-widest"
+          >
+            Support
+          </h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Contact Support</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="#"
+                >Documentation</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-outline-variant hover:text-white transition-colors text-body-sm"
+                href="suppliers.html"
+                >Supplier Portal</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Mobile menu toggle
+      const menuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const isOpen = !mobileMenu.classList.contains("hidden");
+          mobileMenu.classList.toggle("hidden");
+          this.setAttribute("aria-expanded", String(!isOpen));
+          const icon = this.querySelector(".material-symbols-outlined");
+          if (icon) {
+            icon.textContent = isOpen ? "menu" : "close";
+          }
+        });
+      }
+    </script>
+    <script>
+      // Waitlist form - sends data to our own backend (/api/waitlist), which writes to Postgres
+      const notifyForm = document.getElementById("notify-form");
+      if (notifyForm) {
+        notifyForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const btn = document.getElementById("notify-btn");
+          const input = document.getElementById("notify-email");
+          const email = input.value.trim();
+
+          if (!email) {
+            alert("Please enter a valid email address.");
+            return;
+          }
+
+          // Disable button and show loading state
+          btn.textContent = "Submitting...";
+          btn.disabled = true;
+
+          // Same-origin request to our Express route — no CORS issues since this
+          // is served from the same app, so we get a real, readable JSON response.
+          fetch("/api/waitlist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
+          })
+            .then((response) =>
+              response.json().then((data) => ({ ok: response.ok, data })),
+            )
+            .then(({ ok, data }) => {
+              if (ok && data.success) {
+                btn.textContent = "You're on the list! 🚀";
+                btn.classList.add("opacity-70");
+                input.value = "";
+              } else {
+                // Covers duplicate email and validation errors alike —
+                // the backend returns success: false with a message either way.
+                alert(
+                  data.message || "Something went wrong. Please try again.",
+                );
+                btn.textContent = "Notify Me";
+                btn.disabled = false;
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Something went wrong. Please try again.");
+              btn.textContent = "Notify Me";
+              btn.disabled = false;
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
