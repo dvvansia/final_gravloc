@@ -1,9 +1,8 @@
-const Joi = require("joi");
+const express = require("express");
+const router = express.Router();
 
-const createWaitlistSchema = Joi.object({
-  email: Joi.string().email().required(),
-});
+const waitlistController = require("./waitlist.controller");
 
-module.exports = {
-  createWaitlistSchema,
-};
+router.post("/", waitlistController.addToWaitlist);
+
+module.exports = router;
