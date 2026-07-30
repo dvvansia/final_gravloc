@@ -20,20 +20,3 @@ const addToWaitlist = async (req, res) => {
 module.exports = {
   addToWaitlist,
 };
-
-// Add this function
-exports.getWaitlist = async (req, res) => {
-  try {
-    const { Waitlist } = require("./waitlist.model");
-    const entries = await Waitlist.findAll({
-      order: [["created_at", "DESC"]],
-    });
-    res.json({
-      total: entries.length,
-      entries: entries,
-    });
-  } catch (error) {
-    console.error("Error fetching waitlist:", error);
-    res.status(500).json({ error: "Failed to fetch waitlist" });
-  }
-};
