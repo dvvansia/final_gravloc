@@ -18,7 +18,7 @@ const addToWaitlist = async ({ email }) => {
     email,
   });
 
-  // Email failures should never break the signup itself — log and move on.
+  // Email failures should never break the signup itself.
   try {
     const info = await sendUserWaitlistEmail(email);
     console.log("Waitlist confirmation email sent:", info.messageId);
@@ -29,6 +29,15 @@ const addToWaitlist = async ({ email }) => {
   return user;
 };
 
+const getWaitlist = async () => {
+  const users = await Waitlist.findAll({
+    order: [["createdAt", "DESC"]],
+  });
+
+  return users;
+};
+
 module.exports = {
   addToWaitlist,
+  getWaitlist,
 };
