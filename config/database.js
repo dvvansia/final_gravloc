@@ -1,11 +1,14 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
-let sequelize;
+// ⚠️ FOR RENDER: Use DATABASE_URL from environment
+const databaseUrl = process.env.DATABASE_URL;
 
-if (process.env.DATABASE_URL) {
-  // Use the DATABASE_URL for production (e.g., on Render)
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+console.log("🔍 DATABASE_URL exists:", !!databaseUrl);
+
+if (databaseUrl) {
+  console.log("✅ Using DATABASE_URL for connection");
+  const sequelize = new Sequelize(databaseUrl, {
     dialect: "postgres",
     logging: false,
     dialectOptions: {
@@ -15,13 +18,14 @@ if (process.env.DATABASE_URL) {
       },
     },
   });
+  module.exports = sequelize;
 } else {
-  // Fallback to config.json for local development
+  console.log("⚠️ DATABASE_URL not found, using config.json fallback");
   const config = require("./config.json");
   const env = process.env.NODE_ENV || "development";
   const dbConfig = config[env];
 
-  sequelize = new Sequelize(
+  const sequelize = new Sequelize(
     dbConfig.database,
     dbConfig.username,
     dbConfig.password,
@@ -32,6 +36,5 @@ if (process.env.DATABASE_URL) {
       logging: false,
     }
   );
+  module.exports = sequelize;
 }
-
-module.exports = sequelize;
