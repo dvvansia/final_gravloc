@@ -1,14 +1,23 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
-// ⚠️ FOR RENDER: Use DATABASE_URL from environment
-const databaseUrl = process.env.DATABASE_URL;
+let sequelize;
 
-console.log("🔍 DATABASE_URL exists:", !!databaseUrl);
-
-if (databaseUrl) {
-  console.log("✅ Using DATABASE_URL for connection");
-  const sequelize = new Sequelize(databaseUrl, {
+// Check if DATABASE_URL is provided
+if (process.env.DATABASE_URL) {
+  console.log("🔍 DATABASE_URL exists:", true);
+  
+  // Ensure SSL parameter is included
+  let dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl.includes("ssl=true") && !dbUrl.includes("sslmode=require")) {
+    const separator = dbUrl.includes("?") ? "&" : "?";
+    dbUrl += `${separator}ssl=true`;
+    console.log(`✅ Added ssl=true to DATABASE_URL`);
+  }
+  
+  console.log(`✅ Using DATABASE_URL for connection`);
+  
+  sequelize = new Sequelize(dbUrl, {
     dialect: "postgres",
     logging: false,
     dialectOptions: {
@@ -18,14 +27,14 @@ if (databaseUrl) {
       },
     },
   });
-  module.exports = sequelize;
 } else {
   console.log("⚠️ DATABASE_URL not found, using config.json fallback");
+  
   const config = require("./config.json");
   const env = process.env.NODE_ENV || "development";
   const dbConfig = config[env];
 
-  const sequelize = new Sequelize(
+  sequelize = new Sequelize(
     dbConfig.database,
     dbConfig.username,
     dbConfig.password,
@@ -36,5 +45,6 @@ if (databaseUrl) {
       logging: false,
     }
   );
-  module.exports = sequelize;
 }
+
+module.exports = sequelize;
