@@ -6,13 +6,27 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+
+// ✅ PRIORITY 1: Use DATABASE_URL if available (Render production)
+if (process.env.DATABASE_URL) {
+  console.log('🔍 [MODELS] Using DATABASE_URL for connection');
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  });
 } else {
+  // ✅ FALLBACK: Use config.json for local development
+  console.log('⚠️ [MODELS] DATABASE_URL not found, using config.json fallback');
+  const config = require(__dirname + '/../config/config.json')[env];
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
