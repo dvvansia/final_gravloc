@@ -17,6 +17,23 @@ const addToWaitlist = async (req, res) => {
   }
 };
 
+const getWaitlist = async (req, res) => {
+  try {
+    const result = await waitlistService.getWaitlist();
+
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   addToWaitlist,
+  getWaitlist,
 };
