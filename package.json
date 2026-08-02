@@ -1,8 +1,14 @@
 {
   "name": "gravloc",
   "version": "1.0.0",
+  "description": "gravloc is space grade procurement",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
   "scripts": {
-    "start": "npx sequelize-cli db:migrate && node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx sequelize-cli db:migrate --url \"$DATABASE_URL\" && node index.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
