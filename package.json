@@ -1,13 +1,7 @@
 {
   "name": "gravloc",
   "version": "1.0.0",
-  "description": "gravloc is space grade procurement",
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx sequelize-cli db:migrate && node index.js",
     "dev": "nodemon index.js"
   },
@@ -22,14 +16,13 @@
     "joi": "^18.2.3",
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.11.0",
-    "mysql2": "^3.23.0",
     "nodemailer": "^9.0.3",
     "pg": "^8.21.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.8"
+    "sequelize": "^6.37.8",
+    "sequelize-cli": "^6.6.5"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14",
-    "sequelize-cli": "^6.6.5"
+    "nodemon": "^3.1.14"
   }
 }
