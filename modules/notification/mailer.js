@@ -1,3 +1,6 @@
+const dns = require("dns");
+dns.setDefaultResultOrder("ipv4first");
+
 const nodemailer = require("nodemailer");
 const env = require("../../config/env");
 
@@ -11,7 +14,6 @@ const transporter = nodemailer.createTransport({
   },
   // Some networks resolve SMTP hosts to IPv6 but have no real IPv6 route,
   // causing ENETUNREACH. Forcing IPv4 avoids that.
-  family: 4,
 });
 
 /**
