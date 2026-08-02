@@ -1,24 +1,50 @@
-// src/config/database.js
-require('dotenv').config();
+const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
-module.exports = {
-  development: {
-    // Your local settings can stay the same
-    username: process.env.DB_USER || "postgres",
-    password: process.env.DB_PASSWORD || "password",
-    database: process.env.DB_NAME || "gravloc",
-    host: "127.0.0.1",
-    dialect: "postgres"
-  },
-  production: {
-    // This tells Sequelize to use the URL provided by Render
-    use_env_variable: 'DATABASE_URL',
-    dialect: 'postgres',
+let sequelize;
+
+// Check if DATABASE_URL is provided
+if (process.env.DATABASE_URL) {
+  console.log("🔍 DATABASE_URL exists:", true);
+  
+  // Ensure SSL parameter is included
+  let dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl.includes("ssl=true") && !dbUrl.includes("sslmode=require")) {
+    const separator = dbUrl.includes("?") ? "&" : "?";
+    dbUrl += `${separator}ssl=true`;
+    console.log(`✅ Added ssl=true to DATABASE_URL`);
+  }
+  
+  console.log(`✅ Using DATABASE_URL for connection`);
+  
+  sequelize = new Sequelize(dbUrl, {
+    dialect: "postgres",
+    logging: false,
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false // Required by Render PostgreSQL
-      }
+        rejectUnauthorized: false,
+      },
+    },
+  });
+} else {
+  console.log("⚠️ DATABASE_URL not found, using config.json fallback");
+  
+  const config = require("./config.json");
+  const env = process.env.NODE_ENV || "development";
+  const dbConfig = config[env];
+
+  sequelize = new Sequelize(
+    dbConfig.database,
+    dbConfig.username,
+    dbConfig.password,
+    {
+      host: dbConfig.host,
+      port: dbConfig.port,
+      dialect: dbConfig.dialect,
+      logging: false,
     }
-  }
-};
+  );
+}
+
+module.exports = sequelize;
