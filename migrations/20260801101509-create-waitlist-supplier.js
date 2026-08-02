@@ -4,7 +4,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Waitlist", {
+    await queryInterface.createTable("SupplierWaitlist", {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -24,7 +24,7 @@ module.exports = {
         defaultValue: false,
       },
 
-      notifiedAt: {
+      notified_at: {
         type: Sequelize.DATE,
         allowNull: true,
       },
@@ -44,6 +44,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable("Waitlist");
+    await queryInterface.dropTable("SupplierWaitlist");
   },
 };

@@ -33,8 +33,10 @@ app.get("/supplier", (req, res) => {
   res.render("supplier");
 });
 
-const waitlistRoutes = require("./modules/waitlist/waitlist.routes");
+const waitlistRoutes = require("./modules/user-waitlist/waitlist.routes");
+const supplierWaitlistRoutes = require("./modules/supplier-waitlist/supplier-waitlist.routes");
 
 app.use("/api/waitlist", waitlistRoutes);
+app.use("/api/supplier-waitlist", supplierWaitlistRoutes);
 
 module.exports = app;

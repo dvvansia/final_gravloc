@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Suppliers | GRAVLOC Aerospace</title>
+    <title>GRAVLOC | Supplier Workspace — Building Mission Control</title>
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -36,7 +36,7 @@
         theme: {
           extend: {
             colors: {
-              "inverse-surface": "#303032",
+              "inverse-surface": "#14123a",
               "tertiary-fixed-dim": "#e7bf97",
               error: "#ba1a1a",
               "on-error": "#ffffff",
@@ -56,7 +56,7 @@
               surface: "#fbf9fb",
               "secondary-fixed-dim": "#bcc7de",
               "outline-variant": "#c4c6cd",
-              "primary-container": "#0b1f33",
+              "primary-container": "#1e1b4b",
               "primary-fixed-dim": "#b5c8e3",
               "on-primary-container": "#7587a0",
               "inverse-primary": "#b5c8e3",
@@ -83,7 +83,8 @@
               "surface-tint": "#4e6077",
               outline: "#74777d",
               "on-tertiary-container": "#a27f5b",
-              "accent-cyan": "#38BDF8",
+              "accent-cyan": "#3B82F6",
+              "accent-indigo": "#4F46E5",
             },
             borderRadius: {
               DEFAULT: "0.25rem",
@@ -107,41 +108,64 @@
             },
             fontSize: {
               "display-lg": [
-                "48px",
+                "52px",
                 {
-                  lineHeight: "56px",
-                  letterSpacing: "-0.02em",
+                  lineHeight: "58px",
+                  letterSpacing: "-0.03em",
                   fontWeight: "700",
                 },
               ],
               "headline-lg": [
                 "32px",
                 {
-                  lineHeight: "40px",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "600",
+                  lineHeight: "39px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
                 },
               ],
               "headline-md": [
                 "24px",
-                { lineHeight: "32px", fontWeight: "600" },
+                {
+                  lineHeight: "31px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
               ],
               "label-mono": [
                 "12px",
                 {
                   lineHeight: "16px",
-                  letterSpacing: "0.05em",
-                  fontWeight: "500",
+                  letterSpacing: "0.08em",
+                  fontWeight: "600",
                 },
               ],
-              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-              "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "21px", fontWeight: "400" }],
             },
           },
         },
       };
     </script>
     <style>
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      body {
+        letter-spacing: -0.005em;
+      }
+      h1,
+      h2,
+      h3 {
+        text-wrap: balance;
+      }
+      .btn-primary {
+        box-shadow: 0 8px 24px -8px rgba(30, 27, 75, 0.45);
+      }
+      .btn-primary:hover {
+        box-shadow: 0 10px 30px -6px rgba(59, 130, 246, 0.45);
+      }
       .material-symbols-outlined {
         font-variation-settings:
           "FILL" 0,
@@ -202,25 +226,26 @@
           >
             <span class="material-symbols-outlined">menu</span>
           </button>
-          <a href="index.html"
-            ><img
+          <a href="/" class="flex items-center gap-2.5 group">
+            <img
               alt="GRAVLOC"
-              class="h-7 md:h-8 w-auto object-contain"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa"
-          /></a>
+              class="h-9 md:h-11 w-auto object-contain drop-shadow-[0_2px_10px_rgba(59,130,246,0.4)] transition-transform duration-300 group-hover:scale-105"
+              src="/images/Logo.png"
+            />
+          </a>
           <nav class="hidden lg:flex items-center gap-6">
             <a
-              class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200"
+              class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-cyan transition-colors duration-200"
               href="/"
               >Home</a
             >
             <a
-              class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200"
-              href="/dashboard"
+              class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-cyan transition-colors duration-200"
+              href="/waitlist"
               >Explore Catalogue</a
             >
             <a
-              class="font-label-mono text-label-mono text-primary font-bold border-b-2 border-primary pb-1"
+              class="font-label-mono text-label-mono text-accent-indigo font-bold border-b-2 border-accent-cyan pb-1"
               href="/supplier"
               >Suppliers</a
             >
@@ -228,13 +253,13 @@
         </div>
         <div class="flex items-center gap-2 md:gap-4">
           <a
-            href="supplier.html"
-            class="hidden sm:inline-block font-label-mono text-label-mono text-on-surface-variant px-2 md:px-4 py-2 hover:text-primary"
+            href="/waitlist"
+            class="hidden sm:inline-block font-label-mono text-label-mono text-on-surface-variant px-2 md:px-4 py-2 hover:text-accent-cyan transition-colors"
             >Log In</a
           >
           <a
-            href="supplier.html"
-            class="bg-primary-container text-white px-4 md:px-6 py-2 md:py-2.5 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity inline-block"
+            href="/waitlist"
+            class="bg-gradient-to-r from-accent-cyan to-accent-indigo text-white px-4 md:px-6 py-2 md:py-2.5 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity inline-block"
             >Sign Up</a
           >
         </div>
@@ -244,28 +269,27 @@
         id="mobile-menu"
         class="hidden lg:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant shadow-lg"
       >
-        <nav class="flex flex-col px-margin-mobile py-4 gap-1">
+        <nav class="hidden lg:flex items-center gap-6">
           <a
-            class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary transition-colors"
-            href="index.html"
+            class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-cyan transition-colors duration-200"
+            href="/"
             >Home</a
           >
           <a
-            class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary transition-colors"
-            href="dashboard.html"
+            class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-cyan transition-colors duration-200"
+            href="/"
             >Explore Catalogue</a
           >
           <a
-            class="font-label-mono text-label-mono text-primary font-bold px-3 py-3 rounded hover:bg-surface-container"
+            class="font-label-mono text-label-mono text-accent-indigo font-bold border-b-2 border-accent-cyan pb-1"
             href="supplier.html"
             >Suppliers</a
           >
         </nav>
       </div>
     </header>
-
     <!-- Status Section -->
-    <section class="relative overflow-hidden pt-10 pb-20 lg:pt-20 lg:pb-28">
+    <section class="relative overflow-hidden pt-8 pb-14 lg:pt-14 lg:pb-20">
       <div
         class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"
       >
@@ -280,36 +304,36 @@
               ></span>
               <span
                 class="font-label-mono text-[10px] uppercase tracking-widest"
-                >Buyer Workspace</span
+                >Supplier Workspace</span
               >
             </div>
 
             <h1
               class="font-headline-lg text-[32px] leading-[1.15] md:text-display-lg max-w-xl text-primary-container"
             >
-              Your mission control for component sourcing is in development
+              Your mission control for order fulfillment is in development
             </h1>
 
             <p
-              class="font-body-md text-body-lg text-on-surface-variant max-w-lg"
+              class="font-body-md text-body-md text-on-surface-variant max-w-lg"
             >
-              The GRAVLOC dashboard brings search, side-by-side comparison, RFQ
-              tracking, and your approved vendor list into a single workspace.
-              We're finishing the core workflows now.
+              The GRAVLOC supplier workspace brings your product catalogue,
+              incoming RFQs, purchase order tracking, and buyer relationships
+              into a single dashboard. We're finishing the core workflows now.
             </p>
 
             <div class="technical-line max-w-xs"></div>
 
             <div class="flex flex-wrap gap-4 pt-2">
               <a
-                href="index.html"
-                class="bg-primary-container text-white px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md flex items-center gap-2 hover:scale-[1.02] transition-transform"
+                href="/index.ejs"
+                class="btn-primary bg-gradient-to-r from-accent-cyan to-accent-indigo text-white px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md flex items-center gap-2 hover:scale-[1.02] transition-all"
               >
                 Back to Home
                 <span class="material-symbols-outlined">arrow_forward</span>
               </a>
               <a
-                href="dashboard.html"
+                href="/#roadmap"
                 class="border border-primary-container text-primary-container px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md hover:bg-surface-container-low transition-colors inline-block"
               >
                 See the Roadmap
@@ -327,14 +351,14 @@
             >
               <div class="flex items-center justify-between">
                 <div
-                  class="w-14 h-14 bg-primary-container text-white rounded-lg flex items-center justify-center"
+                  class="w-14 h-14 bg-gradient-to-br from-accent-cyan to-accent-indigo text-white rounded-lg flex items-center justify-center"
                 >
                   <span class="material-symbols-outlined text-[28px]"
-                    >dashboard</span
+                    >inventory_2</span
                   >
                 </div>
                 <span
-                  class="font-label-mono text-[10px] uppercase tracking-widest text-accent-cyan border border-accent-cyan/40 rounded-full px-3 py-1"
+                  class="font-label-mono text-[10px] uppercase tracking-widest text-accent-indigo border border-accent-cyan/40 rounded-full px-3 py-1"
                   >In Development</span
                 >
               </div>
@@ -350,12 +374,13 @@
                   class="w-full h-2 rounded-full bg-surface-container overflow-hidden"
                 >
                   <div
-                    class="h-full bg-accent-cyan rounded-full progress-fill"
+                    class="h-full bg-gradient-to-r from-accent-cyan to-accent-indigo rounded-full progress-fill"
                     style="width: 45%"
                   ></div>
                 </div>
                 <p class="text-body-sm text-on-surface-variant pt-1">
-                  Buyer workspace and approved vendor list (AVL) build underway.
+                  Supplier onboarding, catalogue management, and RFQ response
+                  tools build underway.
                 </p>
               </div>
 
@@ -379,7 +404,7 @@
                   <button
                     id="notify-btn"
                     type="submit"
-                    class="bg-primary-container text-white px-6 py-3 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity whitespace-nowrap"
+                    class="btn-primary bg-gradient-to-r from-accent-cyan to-accent-indigo text-white px-6 py-3 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity whitespace-nowrap"
                   >
                     Notify Me
                   </button>
@@ -393,23 +418,28 @@
         </div>
       </div>
     </section>
-
     <!-- Footer (Shared Component) -->
     <footer
-      class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant"
+      class="bg-gradient-to-br from-inverse-surface via-primary-container to-accent-indigo dark:bg-surface-container-lowest border-t border-outline-variant"
     >
       <div
         class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-12 gap-gutter"
       >
         <div class="col-span-12 lg:col-span-4 space-y-6">
-          <img
-            alt="GRAVLOC"
-            class="h-8 w-auto object-contain brightness-0 invert"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa"
-          />
+          <div class="flex items-center gap-2.5">
+            <img
+              alt="GRAVLOC"
+              class="h-10 w-auto object-contain drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]"
+              src="/images/White logo.png"
+            />
+            <span
+              class="font-headline-lg font-bold text-[20px] tracking-tight text-white leading-none"
+              >GRAVLOC</span
+            >
+          </div>
           <p class="text-inverse-on-surface font-body-sm max-w-xs opacity-70">
-            © <%= new Date().getFullYear() %> GRAVLOC. All rights reserved.
-            Precision procurement for mission-critical systems.
+            © 2026 GRAVLOC. All rights reserved. Precision procurement for
+            mission-critical systems.
           </p>
           <div class="flex gap-4">
             <a
@@ -483,7 +513,7 @@
             <li>
               <a
                 class="text-outline-variant hover:text-white transition-colors text-body-sm"
-                href="dashboard.html"
+                href="/waitlist"
                 >Product Sitemap</a
               >
             </li>
@@ -587,7 +617,7 @@
             <li>
               <a
                 class="text-outline-variant hover:text-white transition-colors text-body-sm"
-                href="suppliers.html"
+                href="#"
                 >Supplier Portal</a
               >
             </li>
@@ -595,7 +625,6 @@
         </div>
       </div>
     </footer>
-
     <script>
       // Mobile menu toggle
       const menuBtn = document.getElementById("mobile-menu-btn");
@@ -614,7 +643,8 @@
       }
     </script>
     <script>
-      // Waitlist form - sends data to Google Sheets
+      // Waitlist form - sends data to our own backend (/api/supplier-waitlist),
+      // which writes to a dedicated supplier_waitlist table in Postgres
       const notifyForm = document.getElementById("notify-form");
       if (notifyForm) {
         notifyForm.addEventListener("submit", function (e) {
@@ -633,29 +663,24 @@
           btn.textContent = "Submitting...";
           btn.disabled = true;
 
-          // Your Google Apps Script Web App URL
-          const scriptURL =
-            "https://script.google.com/macros/s/AKfycbwgkzzgN6K7zfBiCvUXdSnhpWpTtbwfpZi-B1947hKiM1zlwvqCY73aENDX16Ru5WbJyQ/exec";
-
-          // CHANGED: Package the form data so Google Sheets reads it properly
-          const formData = new FormData(notifyForm);
-
-          // Send the data using fetch with FormData
-          fetch(scriptURL, {
+          // Same-origin request to our Express route — no CORS issues since this
+          // is served from the same app, so we get a real, readable JSON response.
+          fetch("/api/supplier-waitlist", {
             method: "POST",
-            body: formData,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
           })
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.result === "success") {
+            .then((response) =>
+              response.json().then((data) => ({ ok: response.ok, data })),
+            )
+            .then(({ ok, data }) => {
+              if (ok && data.success) {
                 btn.textContent = "You're on the list! 🚀";
                 btn.classList.add("opacity-70");
                 input.value = "";
-              } else if (data.result === "duplicate") {
-                alert("You are already registered on the waitlist!");
-                btn.textContent = "Notify Me";
-                btn.disabled = false;
               } else {
+                // Covers duplicate email and validation errors alike —
+                // the backend returns success: false with a message either way.
                 alert(
                   data.message || "Something went wrong. Please try again.",
                 );

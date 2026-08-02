@@ -38,7 +38,7 @@
         theme: {
           extend: {
             colors: {
-              "inverse-surface": "#303032",
+              "inverse-surface": "#14123a",
               "tertiary-fixed-dim": "#e7bf97",
               error: "#ba1a1a",
               "on-error": "#ffffff",
@@ -58,7 +58,7 @@
               surface: "#fbf9fb",
               "secondary-fixed-dim": "#bcc7de",
               "outline-variant": "#c4c6cd",
-              "primary-container": "#0b1f33",
+              "primary-container": "#1e1b4b",
               "primary-fixed-dim": "#b5c8e3",
               "on-primary-container": "#7587a0",
               "inverse-primary": "#b5c8e3",
@@ -85,7 +85,8 @@
               "surface-tint": "#4e6077",
               outline: "#74777d",
               "on-tertiary-container": "#a27f5b",
-              "accent-cyan": "#38BDF8",
+              "accent-cyan": "#3B82F6",
+              "accent-indigo": "#4F46E5",
             },
             borderRadius: {
               DEFAULT: "0.25rem",
@@ -109,41 +110,74 @@
             },
             fontSize: {
               "display-lg": [
-                "48px",
+                "52px",
                 {
-                  lineHeight: "56px",
-                  letterSpacing: "-0.02em",
+                  lineHeight: "58px",
+                  letterSpacing: "-0.03em",
                   fontWeight: "700",
                 },
               ],
               "headline-lg": [
                 "32px",
                 {
-                  lineHeight: "40px",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "600",
+                  lineHeight: "39px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
                 },
               ],
               "headline-md": [
                 "24px",
-                { lineHeight: "32px", fontWeight: "600" },
+                {
+                  lineHeight: "31px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
               ],
               "label-mono": [
                 "12px",
                 {
                   lineHeight: "16px",
-                  letterSpacing: "0.05em",
-                  fontWeight: "500",
+                  letterSpacing: "0.08em",
+                  fontWeight: "600",
                 },
               ],
-              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-              "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "21px", fontWeight: "400" }],
             },
           },
         },
       };
     </script>
     <style>
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      body {
+        letter-spacing: -0.005em;
+      }
+      h1,
+      h2,
+      h3 {
+        text-wrap: balance;
+      }
+      .btn-primary {
+        box-shadow: 0 8px 24px -8px rgba(11, 31, 51, 0.45);
+      }
+      .btn-primary:hover {
+        box-shadow: 0 10px 30px -6px rgba(59, 130, 246, 0.45);
+      }
+      .feature-card {
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease,
+          border-color 0.25s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 32px -16px rgba(11, 31, 51, 0.25);
+      }
       .material-symbols-outlined {
         font-variation-settings:
           "FILL" 0,
@@ -183,7 +217,7 @@
         background: linear-gradient(
           90deg,
           transparent,
-          rgba(56, 189, 248, 0.1),
+          rgba(79, 70, 229, 0.12),
           transparent
         );
         background-size: 200% 100%;
@@ -217,25 +251,26 @@
           >
             <span class="material-symbols-outlined">menu</span>
           </button>
-          <a href="/"
-            ><img
+          <a href="/" class="flex items-center gap-2.5 group">
+            <img
               alt="GRAVLOC"
-              class="h-7 md:h-8 w-auto object-contain"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa"
-          /></a>
+              class="h-9 md:h-11 w-auto object-contain drop-shadow-[0_2px_10px_rgba(59,130,246,0.4)] transition-transform duration-300 group-hover:scale-105"
+              src="/images/Logo.png"
+            />
+          </a>
           <nav class="hidden lg:flex items-center gap-6">
             <a
-              class="font-label-mono text-label-mono text-primary font-bold border-b-2 border-primary pb-1"
+              class="font-label-mono text-label-mono text-accent-indigo font-bold border-b-2 border-accent-cyan pb-1"
               href="/index"
               >Home</a
             >
             <a
-              class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200"
+              class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-cyan transition-colors duration-200"
               href="/waitlist"
               >Explore Catalogue</a
             >
             <a
-              class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200"
+              class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-cyan transition-colors duration-200"
               href="/supplier"
               >Suppliers</a
             >
@@ -244,12 +279,12 @@
         <div class="flex items-center gap-2 md:gap-4">
           <a
             href="/waitlist"
-            class="hidden sm:inline-block font-label-mono text-label-mono text-on-surface-variant px-2 md:px-4 py-2 hover:text-primary"
+            class="hidden sm:inline-block font-label-mono text-label-mono text-on-surface-variant px-2 md:px-4 py-2 hover:text-accent-cyan transition-colors"
             >Log In</a
           >
           <a
             href="/waitlist"
-            class="bg-primary-container text-white px-4 md:px-6 py-2 md:py-2.5 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity inline-block"
+            class="bg-gradient-to-r from-accent-cyan to-accent-indigo text-white px-4 md:px-6 py-2 md:py-2.5 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity inline-block"
             >Sign Up</a
           >
         </div>
@@ -261,24 +296,24 @@
       >
         <nav class="flex flex-col px-margin-mobile py-4 gap-1">
           <a
-            class="font-label-mono text-label-mono text-primary font-bold px-3 py-3 rounded hover:bg-surface-container"
+            class="font-label-mono text-label-mono text-accent-indigo font-bold px-3 py-3 rounded hover:bg-surface-container"
             href="/"
             >Home</a
           >
           <a
-            class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary transition-colors"
+            class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-accent-cyan transition-colors"
             href="/waitlist"
             >Explore Catalogue</a
           >
           <a
-            class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary transition-colors"
+            class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-accent-cyan transition-colors"
             href="/supplier"
             >Suppliers</a
           >
           <div class="border-t border-outline-variant mt-2 pt-3 sm:hidden">
             <a
               href="/waitlist"
-              class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary block"
+              class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-accent-cyan block"
               >Log In</a
             >
           </div>
@@ -286,8 +321,21 @@
       </div>
     </header>
     <!-- Hero Section -->
-    <section class="relative overflow-hidden pt-10 pb-16 lg:pt-32 lg:pb-24">
-      <div class="absolute inset-0 z-0 pointer-events-none opacity-20"></div>
+    <section class="relative overflow-hidden pt-8 pb-12 lg:pt-14 lg:pb-16">
+      <div
+        class="absolute inset-0 z-0 pointer-events-none opacity-[0.25]"
+        style="
+          background-image:
+            linear-gradient(90deg, #dbeafe 1px, transparent 1px),
+            linear-gradient(180deg, #dbeafe 1px, transparent 1px);
+          background-size: 64px 64px;
+          mask-image: radial-gradient(
+            ellipse 70% 50% at 65% 15%,
+            black 35%,
+            transparent 100%
+          );
+        "
+      ></div>
       <div
         class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10"
       >
@@ -309,7 +357,12 @@
             <h1
               class="font-headline-lg text-[32px] leading-[1.15] md:text-display-lg max-w-xl text-primary-container"
             >
-              Source space-grade components with confidence
+              Source
+              <span
+                class="bg-gradient-to-r from-accent-cyan to-accent-indigo bg-clip-text text-transparent"
+                >space-grade components</span
+              >
+              with confidence
             </h1>
             <p
               class="font-body-md text-body-lg text-on-surface-variant max-w-lg"
@@ -321,7 +374,7 @@
             <div class="flex flex-wrap gap-4 pt-4">
               <a
                 href="/waitlist"
-                class="bg-primary-container text-white px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md flex items-center gap-2 hover:scale-[1.02] transition-transform"
+                class="btn-primary bg-gradient-to-r from-accent-cyan to-accent-indigo text-white px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md flex items-center gap-2 hover:scale-[1.02] transition-all"
               >
                 Join Early Access
                 <span class="material-symbols-outlined">arrow_forward</span>
@@ -339,23 +392,208 @@
               class="absolute -inset-4 bg-accent-cyan opacity-10 blur-3xl rounded-full group-hover:opacity-20 transition-opacity"
             ></div>
             <div
-              class="relative glass-card rounded-xl overflow-hidden shadow-2xl border border-outline-variant"
+              class="relative glass-card rounded-xl overflow-hidden shadow-2xl border border-outline-variant bg-gradient-to-br from-primary-container to-inverse-surface p-5 md:p-6"
             >
-              <img
-                class="w-full aspect-[4/3] object-cover"
-                data-alt="A high-fidelity software dashboard showing an aerospace components search interface. Dark theme UI with spectral graphs of radiation hardening, mechanical schematics of reaction wheels, and verified supplier badges. The interface looks professional, modern, and data-dense with cyan and navy accents."
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdkjUZXsi6AzhPHIb3YVvjPX3fC_ObjCSJEdtfQuuIfM09_r7T2F7Gg2oo2UZWOW0j7uvHwtfmSaIjnUbzofr5hodu9MtIjVaVNdrEiiql7O0-oSIyYYn_4wVn9QK_IwErUiwjh8I9JetVHzTScJgXzID_tg6dDmfSImyTL2oauo97mEpEdmlTs6Zzea0XMlqBojIK2KzsAEIkazzpcG3bqXhMWCDDEvRFwOfjaHd2GAguP-AeRVEKRgxRCGu-Yt81yYp7jo7mC_6q"
-              />
+              <!-- Console top bar -->
+              <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-accent-cyan to-accent-indigo"
+                  ></span>
+                  <span
+                    class="font-label-mono text-[10px] tracking-widest text-white/70 uppercase"
+                    >Gravloc Console</span
+                  >
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-white/15"></span>
+                  <span class="w-2 h-2 rounded-full bg-white/15"></span>
+                  <span class="w-2 h-2 rounded-full bg-accent-cyan"></span>
+                </div>
+              </div>
+
+              <!-- Stat chips -->
+              <div class="grid grid-cols-3 gap-2 mb-4">
+                <div
+                  class="bg-white/5 border border-white/10 rounded-lg px-3 py-2"
+                >
+                  <div
+                    class="text-[9px] font-label-mono text-white/40 uppercase"
+                  >
+                    Active RFQs
+                  </div>
+                  <div class="text-white text-sm font-headline-md mt-0.5">
+                    128
+                  </div>
+                </div>
+                <div
+                  class="bg-white/5 border border-white/10 rounded-lg px-3 py-2"
+                >
+                  <div
+                    class="text-[9px] font-label-mono text-white/40 uppercase"
+                  >
+                    Verified Vendors
+                  </div>
+                  <div class="text-white text-sm font-headline-md mt-0.5">
+                    340
+                  </div>
+                </div>
+                <div
+                  class="bg-white/5 border border-white/10 rounded-lg px-3 py-2"
+                >
+                  <div
+                    class="text-[9px] font-label-mono text-white/40 uppercase"
+                  >
+                    Avg. Match
+                  </div>
+                  <div class="text-white text-sm font-headline-md mt-0.5">
+                    94%
+                  </div>
+                </div>
+              </div>
+
+              <!-- Line chart -->
               <div
-                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"
-              ></div>
+                class="bg-white/5 border border-white/10 rounded-lg p-3 mb-3"
+              >
+                <div
+                  class="text-[9px] font-label-mono text-white/40 uppercase mb-2"
+                >
+                  Radiation Tolerance Trend
+                </div>
+                <svg
+                  viewBox="0 0 300 70"
+                  class="w-full h-14"
+                  preserveAspectRatio="none"
+                >
+                  <defs>
+                    <linearGradient
+                      id="heroLineGrad"
+                      x1="0"
+                      y1="0"
+                      x2="1"
+                      y2="0"
+                    >
+                      <stop offset="0%" stop-color="#3B82F6" />
+                      <stop offset="100%" stop-color="#4F46E5" />
+                    </linearGradient>
+                  </defs>
+                  <polyline
+                    fill="none"
+                    stroke="url(#heroLineGrad)"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    points="0,55 30,45 60,50 90,28 120,35 150,15 180,26 210,10 240,22 270,8 300,16"
+                  />
+                </svg>
+              </div>
+
+              <!-- Bar chart -->
+              <div
+                class="bg-white/5 border border-white/10 rounded-lg p-3 mb-4"
+              >
+                <div
+                  class="text-[9px] font-label-mono text-white/40 uppercase mb-2"
+                >
+                  Supplier Match Score
+                </div>
+                <div class="flex items-end gap-1.5 h-14">
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 45%"
+                  ></div>
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 70%"
+                  ></div>
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 55%"
+                  ></div>
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 90%"
+                  ></div>
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 35%"
+                  ></div>
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 65%"
+                  ></div>
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 80%"
+                  ></div>
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 50%"
+                  ></div>
+                  <div
+                    class="flex-1 rounded-sm bg-gradient-to-t from-accent-indigo to-accent-cyan"
+                    style="height: 100%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Gauges -->
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="relative w-12 h-12 rounded-full shrink-0"
+                    style="
+                      background: conic-gradient(
+                        #3b82f6 0% 72%,
+                        rgba(255, 255, 255, 0.1) 72% 100%
+                      );
+                    "
+                  >
+                    <div
+                      class="absolute inset-[3px] rounded-full bg-primary-container flex items-center justify-center text-white text-[10px] font-headline-md"
+                    >
+                      72%
+                    </div>
+                  </div>
+                  <div
+                    class="text-[9px] font-label-mono text-white/40 uppercase leading-tight"
+                  >
+                    ITAR<br />Compliance
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div
+                    class="relative w-12 h-12 rounded-full shrink-0"
+                    style="
+                      background: conic-gradient(
+                        #4f46e5 0% 88%,
+                        rgba(255, 255, 255, 0.1) 88% 100%
+                      );
+                    "
+                  >
+                    <div
+                      class="absolute inset-[3px] rounded-full bg-primary-container flex items-center justify-center text-white text-[10px] font-headline-md"
+                    >
+                      88%
+                    </div>
+                  </div>
+                  <div
+                    class="text-[9px] font-label-mono text-white/40 uppercase leading-tight"
+                  >
+                    Lead Time<br />Score
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
     <!-- Trust Bar -->
-    <section class="bg-primary-container py-12">
+    <section
+      class="bg-gradient-to-r from-primary-container via-primary-container to-accent-indigo py-12"
+    >
       <div
         class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"
       >
@@ -414,10 +652,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
           <!-- Feature 1 -->
           <div
-            class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
+            class="feature-card p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
           >
             <div
-              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors"
+              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br group-hover:from-accent-cyan group-hover:to-accent-indigo group-hover:text-white transition-all"
             >
               <span class="material-symbols-outlined" data-icon="search"
                 >search</span
@@ -433,10 +671,10 @@
           </div>
           <!-- Feature 2 -->
           <div
-            class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
+            class="feature-card p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
           >
             <div
-              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors"
+              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br group-hover:from-accent-cyan group-hover:to-accent-indigo group-hover:text-white transition-all"
             >
               <span class="material-symbols-outlined" data-icon="filter_list"
                 >filter_list</span
@@ -452,10 +690,10 @@
           </div>
           <!-- Feature 3 -->
           <div
-            class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
+            class="feature-card p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
           >
             <div
-              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors"
+              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br group-hover:from-accent-cyan group-hover:to-accent-indigo group-hover:text-white transition-all"
             >
               <span class="material-symbols-outlined" data-icon="compare"
                 >compare</span
@@ -471,10 +709,10 @@
           </div>
           <!-- Feature 4 -->
           <div
-            class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
+            class="feature-card p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
           >
             <div
-              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors"
+              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br group-hover:from-accent-cyan group-hover:to-accent-indigo group-hover:text-white transition-all"
             >
               <span class="material-symbols-outlined" data-icon="verified"
                 >verified</span
@@ -490,10 +728,10 @@
           </div>
           <!-- Feature 5 -->
           <div
-            class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
+            class="feature-card p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
           >
             <div
-              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors"
+              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br group-hover:from-accent-cyan group-hover:to-accent-indigo group-hover:text-white transition-all"
             >
               <span class="material-symbols-outlined" data-icon="encrypted"
                 >encrypted</span
@@ -509,10 +747,10 @@
           </div>
           <!-- Feature 6 -->
           <div
-            class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
+            class="feature-card p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group"
           >
             <div
-              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors"
+              class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-gradient-to-br group-hover:from-accent-cyan group-hover:to-accent-indigo group-hover:text-white transition-all"
             >
               <span class="material-symbols-outlined" data-icon="task_alt"
                 >task_alt</span
@@ -536,7 +774,7 @@
     <!-- RFQ Preview -->
 
     <!-- Roadmap Section -->
-    <section class="py-24 bg-surface-container">
+    <section class="py-24 bg-surface-container" id="roadmap">
       <div
         class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"
       >
@@ -815,45 +1053,25 @@
       </div>
     </section>
 
-    <!-- Early Access CTA -->
-    <section class="py-24 bg-primary-container">
-      <div
-        class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center"
-      >
-        <h2 class="font-headline-lg text-headline-lg text-white">
-          Ready to transform your component sourcing?
-        </h2>
-        <p class="text-on-primary-container mt-4 max-w-lg mx-auto">
-          Join the waitlist for early access. Be the first to use GRAVLOC when
-          we launch.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-          <a
-            href="/waitlist"
-            class="bg-white text-primary-container px-8 py-3.5 rounded-lg font-headline-md text-body-md hover:scale-[1.02] transition-transform inline-block"
-          >
-            Get Early Access
-          </a>
-        </div>
-        <p class="text-on-primary-container/60 text-body-sm mt-4">
-          No spam. Unsubscribe anytime.
-        </p>
-      </div>
-    </section>
-
     <!-- Footer (Shared Component) -->
     <footer
-      class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant"
+      class="bg-gradient-to-br from-inverse-surface via-primary-container to-accent-indigo dark:bg-surface-container-lowest border-t border-outline-variant"
     >
       <div
         class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-12 gap-gutter"
       >
         <div class="col-span-12 lg:col-span-4 space-y-6">
-          <img
-            alt="GRAVLOC"
-            class="h-8 w-auto object-contain brightness-0 invert"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa"
-          />
+          <div class="flex items-center gap-2.5">
+            <img
+              alt="GRAVLOC"
+              class="h-10 w-auto object-contain drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]"
+              src="/images/White logo.png"
+            />
+            <span
+              class="font-headline-lg font-bold text-[20px] tracking-tight text-white leading-none"
+              >GRAVLOC</span
+            >
+          </div>
           <p class="text-inverse-on-surface font-body-sm max-w-xs opacity-70">
             © 2026 GRAVLOC. All rights reserved. Precision procurement for
             mission-critical systems.
@@ -1034,7 +1252,7 @@
             <li class="">
               <a
                 class="text-outline-variant hover:text-white transition-colors text-body-sm"
-                href="suppliers.html"
+                href="/supplier"
                 >Supplier Portal</a
               >
             </li>

@@ -3,30 +3,18 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class SupplierWaitlist extends Model {
     static associate(models) {
-      // Associations will go here
-      // Example:
-      // User.hasMany(models.Project, { foreignKey: "user_id" });
+      // Associations (if needed in future)
     }
   }
 
-  User.init(
+  SupplierWaitlist.init(
     {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false,
-      },
-
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-
-      lastName: {
-        type: DataTypes.STRING,
         allowNull: false,
       },
 
@@ -39,24 +27,26 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
 
-      password: {
-        type: DataTypes.STRING,
+      notification_sent: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
+        field: "notification_sent",
       },
 
-      role: {
-        type: DataTypes.ENUM("ADMIN", "USER"),
-        allowNull: false,
-        defaultValue: "USER",
+      notified_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        field: "notified_at",
       },
     },
     {
       sequelize,
-      modelName: "User",
-      tableName: "users",
+      modelName: "SupplierWaitlist",
+      tableName: "SupplierWaitlist",
       timestamps: true,
     },
   );
 
-  return User;
+  return SupplierWaitlist;
 };
