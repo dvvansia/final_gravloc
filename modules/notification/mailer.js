@@ -1,19 +1,16 @@
-const dns = require("dns");
-dns.setDefaultResultOrder("ipv4first");
-
 const nodemailer = require("nodemailer");
 const env = require("../../config/env");
 
 const transporter = nodemailer.createTransport({
   host: env.MAIL_HOST,
-  port: Number(env.MAIL_PORT) || 587,
-  secure: env.MAIL_SECURE, // true for port 465, false for 587/others
+  // ⚠️ FIXED: Defaults to 2525 (SendGrid) instead of 587 (blocked by Render)
+  port: Number(env.MAIL_PORT) || 2525, 
+  // ✅ Already safe: your env.js converts "false"/"true" strings to real Booleans
+  secure: env.MAIL_SECURE, 
   auth: {
     user: env.MAIL_USER,
     pass: env.MAIL_PASS,
   },
-  // Some networks resolve SMTP hosts to IPv6 but have no real IPv6 route,
-  // causing ENETUNREACH. Forcing IPv4 avoids that.
 });
 
 /**
