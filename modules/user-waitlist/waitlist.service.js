@@ -41,3 +41,18 @@ module.exports = {
   addToWaitlist,
   getWaitlist,
 };
+
+const deleteWaitlistEntry = async (id) => {
+  const entry = await Waitlist.findByPk(id);
+  if (!entry) {
+    throw new Error("Waitlist entry not found.");
+  }
+  await entry.destroy();
+  return { message: "Entry deleted successfully" };
+};
+
+module.exports = {
+  addToWaitlist,
+  getWaitlist,
+  deleteWaitlistEntry, // <-- Don't forget to export this!
+};
