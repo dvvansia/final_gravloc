@@ -32,8 +32,17 @@ const getWaitlist = async (req, res) => {
     });
   }
 };
+const deleteWaitlistEntry = async (req, res) => {
+  try {
+    const result = await waitlistService.deleteWaitlistEntry(req.params.id);
+    return res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    return res.status(404).json({ success: false, message: error.message });
+  }
+};
 
 module.exports = {
   addToWaitlist,
   getWaitlist,
+  deleteWaitlistEntry, // <-- Export this!
 };
