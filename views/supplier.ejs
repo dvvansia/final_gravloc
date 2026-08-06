@@ -666,6 +666,7 @@
                 btn.textContent = "You're on the list! 🚀";
                 btn.classList.add("opacity-70");
                 input.value = "";
+                btn.disabled = false;
               } else {
                 // Covers duplicate email and validation errors alike —
                 // the backend returns success: false with a message either way.
