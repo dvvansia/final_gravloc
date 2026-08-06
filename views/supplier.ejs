@@ -265,28 +265,16 @@
         </div>
       </div>
       <!-- Mobile Menu Panel -->
-      <div
-        id="mobile-menu"
-        class="hidden lg:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant shadow-lg"
-      >
-        <nav class="hidden lg:flex items-center gap-6">
-          <a
-            class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-cyan transition-colors duration-200"
-            href="/"
-            >Home</a
-          >
-          <a
-            class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-cyan transition-colors duration-200"
-            href="/"
-            >Explore Catalogue</a
-          >
-          <a
-            class="font-label-mono text-label-mono text-accent-indigo font-bold border-b-2 border-accent-cyan pb-1"
-            href="supplier.html"
-            >Suppliers</a
-          >
-        </nav>
-      </div>
+      <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant shadow-lg">
+  <nav class="flex flex-col px-margin-mobile py-4 gap-1">
+    <a class="font-label-mono text-label-mono text-accent-indigo font-bold px-3 py-3 rounded hover:bg-surface-container" href="/">Home</a>
+    <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-accent-cyan transition-colors" href="/waitlist">Explore Catalogue</a>
+    <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-accent-cyan transition-colors" href="/supplier">Suppliers</a>
+    <div class="border-t border-outline-variant mt-2 pt-3 sm:hidden">
+      <a href="/waitlist" class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-accent-cyan block">Log In</a>
+    </div>
+  </nav>
+</div>
     </header>
     <!-- Status Section -->
     <section class="relative overflow-hidden pt-8 pb-14 lg:pt-14 lg:pb-20">
