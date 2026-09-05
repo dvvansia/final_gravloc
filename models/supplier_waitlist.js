@@ -1,13 +1,8 @@
 "use strict";
-
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class SupplierWaitlist extends Model {
-    static associate(models) {
-      // Associations (if needed in future)
-    }
-  }
+  class SupplierWaitlist extends Model {}
 
   SupplierWaitlist.init(
     {
@@ -15,25 +10,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false,
       },
-
       email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: {
-          isEmail: true,
-        },
+        validate: { isEmail: true },
       },
-
       notification_sent: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
         field: "notification_sent",
       },
-
       notified_at: {
         type: DataTypes.DATE,
         allowNull: true,
@@ -43,10 +32,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "SupplierWaitlist",
-      tableName: "SupplierWaitlist",
+      tableName: "supplier_waitlists", // <-- lowercase
       timestamps: true,
     },
   );
-
   return SupplierWaitlist;
 };
