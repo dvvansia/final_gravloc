@@ -10,7 +10,7 @@ const db = {};
 
 let sequelize;
 
-// ✅ PRIORITY 1: Use DATABASE_URL if available (Render production)
+// ✅ PRIORITY 1: Use DATABASE_URL if available (Neon + Render)
 if (process.env.DATABASE_URL) {
   console.log('🔍 [MODELS] Using DATABASE_URL for connection');
   sequelize = new Sequelize(process.env.DATABASE_URL, {
@@ -22,6 +22,12 @@ if (process.env.DATABASE_URL) {
         rejectUnauthorized: false,
       },
     },
+    pool: {
+      max: 2,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   });
 } else {
   // ✅ FALLBACK: Use config.json for local development
@@ -31,16 +37,16 @@ if (process.env.DATABASE_URL) {
 }
 
 fs
-  .readdirSync(__dirname)
-  .filter(file => {
+ .readdirSync(__dirname)
+ .filter(file => {
     return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
+      file.indexOf('.')!== 0 &&
+      file!== basename &&
       file.slice(-3) === '.js' &&
       file.indexOf('.test.js') === -1
     );
   })
-  .forEach(file => {
+ .forEach(file => {
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
@@ -55,4 +61,12 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 console.log("Loaded models:", Object.keys(db));
+
+// ✅ AUTO-CREATE TABLES IN NEON (Fixes "relation does not exist")
+db.sequelize.sync({ alter: true }).then(() => {
+  console.log("✅ Tables synced in Neon: SupplierWaitlist, Waitlist");
+}).catch(err => {
+  console.error("❌ Sync failed:", err.message);
+});
+
 module.exports = db;
